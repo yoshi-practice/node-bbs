@@ -22,7 +22,7 @@ gulp.task('scss', () => {
     })]
 
     return gulp
-        .src('./public/src/scss/*.scss')
+        .src('./public/src/scss/**/*.scss')
         .pipe(sass())
         .pipe(postcss(processors))
         .pipe(gulp.dest('public/dist/css/'))
@@ -49,8 +49,8 @@ gulp.task('watch', () => {
     }
     gulp.watch('./public/**/*', browserReload);
     gulp.watch('./public/index.html', browserReload);
-    gulp.watch('./public/src/js/*', gulp.series('babel'));
-    gulp.watch('./public/src/scss/*', gulp.series('scss'));
+    gulp.watch('./public/src/js/**/*.js', gulp.series('babel'));
+    gulp.watch('./public/src/scss/**/*.scss', gulp.series('scss'));
 })
 
 gulp.task('default', gulp.series('serve', 'watch'))
