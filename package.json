@@ -1,0 +1,26 @@
+{
+  "name": "bbs",
+  "version": "1.0.0",
+  "description": "bbs",
+  "main": "public/main.js",
+  "scripts": {
+    "commit": "node ./node_modules/cz-customizable/standalone.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yoshi1125hisa/node-bbs.git"
+  },
+  "keywords": [
+    "javascript"
+  ],
+  "author": "yoshi1125hisa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yoshi1125hisa/node-bbs/issues"
+  },
+  "homepage": "https://github.com/yoshi1125hisa/node-bbs#readme",
+  "devDependencies": {
+    "cz-customizable": "6.2.0"
+  }
+}
