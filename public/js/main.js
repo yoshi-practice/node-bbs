@@ -1,7 +1,7 @@
 'use strict';
 
 const main = () =>
-    firebase.database().ref('/simplebbs/posts').limitToLast(10).on('value', snapshot => {
+    firebase.database().ref('/node-bbs/posts').limitToLast(10).on('value', snapshot => {
         const posts = snapshot.exists() ? snapshot.val() : {}
         let html = ''
         for (const [id, {
