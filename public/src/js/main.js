@@ -1,5 +1,7 @@
 'use strict';
 
+const h = require('hyperscript')
+
 const main = () =>
     firebase.database().ref('/node-bbs/posts').limitToLast(10).on('value', snapshot => {
         const posts = snapshot.exists() ? snapshot.val() : {}
