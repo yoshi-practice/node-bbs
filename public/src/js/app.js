@@ -1,6 +1,6 @@
 'use strict';
 
-const h = require('hyperscript')
+import h from 'hyperscript';
 
 const main = () =>
     firebase.database().ref('/node-bbs/posts').limitToLast(10).on('value', snapshot => {
@@ -30,10 +30,14 @@ const postReply = () => post('/api/post', {
     document.querySelector('#reply__body').value = ''
 })
 
+window.postReply = postReply;
+
 const deleteReply = id => post('/api/delete', {
     id,
     key: prompt('key?') || ''
 })
+
+window.deleteReply = deleteReply;
 
 const post = (path, jsonData) => fetch(path, {
     method: 'POST',
