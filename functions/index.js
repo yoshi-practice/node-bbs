@@ -1,8 +1,12 @@
-const functions = require('firebase-functions')
-const admin = require('firebase-admin')
-admin.initializeApp(functions.config().firebase)
-const db = admin.database()
-const rep = s => s.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>')
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp(functions.config().firebase);
+const db = admin.database();
+
+const moment = require('moment');
+moment.locale("ja");
+
+const rep = s => s.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
 
 exports.post = functions.https.onRequest((request, response) => {
     const {
@@ -10,7 +14,7 @@ exports.post = functions.https.onRequest((request, response) => {
         content,
         key
     } = request.body
-    const date = new Date().toLocaleDateString()
+    const date = moment().format('LLL');
     db.ref('/node-bbs/posts').push({
             name: rep(name),
             content: rep(content),
