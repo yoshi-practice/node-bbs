@@ -6,7 +6,8 @@
   "scripts": {
     "commit": "node ./node_modules/cz-customizable/standalone.js",
     "dev:public": "webpack-dev-server",
-    "build:public": "webpack --mode production"
+    "build:public": "webpack --mode production",
+    "deploy": "npm run build:public; firebase deploy"
   },
   "repository": {
     "type": "git",
