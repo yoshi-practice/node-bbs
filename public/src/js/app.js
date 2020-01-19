@@ -5,40 +5,43 @@ import h from 'hyperscript';
 const main = () =>
     firebase.database().ref('/node-bbs/posts').limitToLast(10).on('value', snapshot => {
         const posts = snapshot.exists() ? snapshot.val() : {}
-        let html = ''
+        let body = ''
         for (const [id, {
                 name,
                 content,
                 date
             }] of Object.entries(posts).reverse())
-            html += makeReply(id, name, content, date)
-        document.querySelector('#replies').innerHTML = html
-    });
+            body += makeReply(id, name, content, date)
+        document.querySelector('#replies').innerHTML = body
+    })
 
 const makeReply = (id, name, content, date) =>
-    `<div class="replies__content">
-  <div class="replies__name">Name: ${name} <span class="replies__date">${date}</span></div>
-  <div class="replies__content">${content}</div>
-  <button class="replies__button--delete" onclick="deleteReply('${id}')">delete</button> </div>
-  `
+    h('div.replies__content',
+        h('div.replies__name',
+            h('p', "Name:", name),
+            h('span.replies__date', date)
+        ),
+        h('div.replies__content',
+            h('p', content)),
+        h('button.replies__button--delete', 
+        'delete')
+    ).outerHTML;
 
-let postReply = function postReply() {
-    post('/api/post', {
-        name: document.querySelector('#reply__name').value,
-        content: document.querySelector('#reply__body').value,
-        key: document.querySelector('#reply__key').value,
-    }).then(e => {
-        document.querySelector('#reply__body').value = ''
-    });
-}
+const postReply = () => post('/api/post', {
+    name: document.querySelector('#reply__name').value,
+    content: document.querySelector('#reply__body').value,
+    key: document.querySelector('#reply__key').value,
+}).then(e => {
+    document.querySelector('#reply__body').value = ''
+})
+
 window.postReply = postReply;
 
-let deleteReply = function deleteReply(id) {
-    post('/api/delete', {
-        id,
-        key: prompt('key?') || ''
-    });
-}
+const deleteReply = id => post('/api/delete', {
+    id,
+    key: prompt('key?') || ''
+})
+
 window.deleteReply = deleteReply;
 
 const post = (path, jsonData) => fetch(path, {
@@ -48,6 +51,6 @@ const post = (path, jsonData) => fetch(path, {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
     },
-});
+})
 
-document.addEventListener('DOMContentLoaded', main);
+document.addEventListener('DOMContentLoaded', main)
