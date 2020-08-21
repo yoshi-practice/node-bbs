@@ -31,7 +31,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "core-js": "^3.0.1",
     "css-loader": "^1.0.0",
-    "cz-customizable": "6.2.0",
+    "cz-customizable": "6.3.0",
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",
